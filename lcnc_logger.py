@@ -743,7 +743,7 @@ class MainWindow(QMainWindow):
         self.s.poll()
         if self.positionCB.currentData() == 'relative':
             # sum the offsets with a negative sign
-            offsets = tuple(-sum(i) for i in zip(self.s.g5x_offset,self.s.g92_offset))
+            offsets = tuple(-sum(i) for i in zip(self.s.g5x_offset,self.s.g92_offset,self.s.tool_offset))
             display = tuple(sum(i) for i in zip(offsets,self.s.actual_position))
         else:
             display = self.s.actual_position
