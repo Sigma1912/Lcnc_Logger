@@ -38,14 +38,18 @@ from PIL import ImageGrab
 print('\n')
 print('--- Starting Postion Logger ---')
 # the python path will tell us where to point the default file path to
-PYTHON_PATH = os.environ["PYTHONPATH"]
-print('Python-path is', PYTHON_PATH)
-if 'usr' in PYTHON_PATH:
-    print('Detected a package installation.')
+if os.environ.get('PYTHONPATH') == None:
+    print('No Python environment variable set. Assuming a deb installation.')    
     FILE_PATH = os.path.expanduser('~') + '/linuxcnc/nc_files'
 else:
-    print('Detected a RIP installation.') 
-    FILE_PATH = os.environ["LINUXCNC_NCFILES_DIR"]
+    PYTHON_PATH = os.environ["PYTHONPATH"]
+    print('Python-path is', PYTHON_PATH)
+    if 'usr' in PYTHON_PATH:
+        print('Detected a package installation.')
+        FILE_PATH = os.path.expanduser('~') + '/linuxcnc/nc_files'
+    else:
+        print('Detected a RIP installation.') 
+        FILE_PATH = os.environ["LINUXCNC_NCFILES_DIR"]
 print('File-Path is ', FILE_PATH)
 
 GUI_PATH = os.path.dirname(os.path.realpath(__file__)) + '/lcnc_logger.ui'
