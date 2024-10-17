@@ -584,7 +584,7 @@ class MainWindow(QMainWindow):
         fileName = QFileDialog.getOpenFileName(self,
             caption="Select a G code File",
             directory = path,
-            filter='GCode(*.ngc);;TextLog(*.txt)',
+            filter='AllFiles(*);;GCode(*.ngc);;TextLog(*.txt)',
             options=QFileDialog.DontUseNativeDialog,)
         if fileName[0]:
             self.gcodeLW.clear()
@@ -630,10 +630,11 @@ class MainWindow(QMainWindow):
         fileName, _ = QFileDialog.getSaveFileName(self,
         caption="Save G Code",
         directory = path,
-        filter=("GCode(*.ngc);;TextLog(*.txt)"),
-        options=QFileDialog.DontUseNativeDialog)
+#        filter=("GCode(*.ngc);;TextLog(*.txt)"),
+        options=QFileDialog.DontUseNativeDialog
+        )
         if fileName:
-            # update the file path 
+            # update the file path
             self.filePath = fileName
             self.gcodeLB.setText(fileName)
             self.save(fileName)
